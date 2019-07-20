@@ -16,4 +16,9 @@ public class MainController {
     private String showLoginPage(Model model){
         return "loginHome";
     }
+
+    @GetMapping("/addNewUser")
+    private String addNewUser (Model model){
+        return "addNewUser";
+    }
 }
