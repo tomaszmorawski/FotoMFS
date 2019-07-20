@@ -30,6 +30,10 @@ public class UserService {
     }
 
     public List<User> getAllUsers(){
-        return userRepository.findAllByRolesContainsOrderById(roleService.getRoleByName("ROLE_USER"));
+        return userRepository.findAllByRolesNotContainingOrderById(roleService.getRoleByName("ROLE_ADMIN"));
+    }
+
+    public void deleteUserById(Long id){
+        userRepository.deleteById(id);
     }
 }

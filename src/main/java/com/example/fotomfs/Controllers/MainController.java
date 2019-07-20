@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
@@ -57,7 +58,15 @@ public class MainController {
 
     @GetMapping("/admin")
     private String adminPage(Model model) {
+        List<User> userList = userService.getAllUsers();
+        model.addAttribute("users", userList);
         return "admin";
+    }
+
+    @GetMapping("/delete/{userId}")
+    private String deleteUser(@PathVariable Long userId, Model model){
+        userService.deleteUserById(userId);
+        return "redirect:/admin";
     }
 
 }

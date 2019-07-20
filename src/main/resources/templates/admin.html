@@ -34,9 +34,9 @@
 
             <h1 class="my-4">ADMIN PAGE </h1>
             <div class="list-group">
-                <a href="#" class="list-group-item">Utwórz nowego użytkownika</a>
+                <a th:href="@{/addNewUser}" class="list-group-item">Utwórz nowego użytkownika</a>
 
-                <a href="#" class="list-group-item">Wyloguj</a>
+                <a th:href="@{/logout}" class="list-group-item">Wyloguj</a>
             </div>
 
         </div>
@@ -59,14 +59,12 @@
                     </tr>
                     </thead>
                     <tbody >
-                    <tr>
-                        <td>Lp</td>
-                        <td>Login</td>
-                        <td>Hasło</td>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.login}">Login</td>
+                        <td th:text="${user.password}">Hasło</td>
                         <td align="center"><a href="adres1"> <img src="\images\icons\change.png" style="width: 17px; height: 17px;"></a></td>
-                        <td align="center">
-                            <a href="adres"> <img src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a>
-                        </td>
+                        <td align="center"><a th:href="@{/delete/}+${user.id}"> <img src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a></td>
                     </tr>
 
                     </tbody>

@@ -12,4 +12,5 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User,Long> {
     User findByLogin(String name);
     List<User> findAllByRolesContainsOrderById(Role role);
+    List<User> findAllByRolesNotContainingOrderById(Role role);
 }
