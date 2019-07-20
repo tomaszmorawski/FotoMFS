@@ -21,4 +21,5 @@ public class MainController {
     private String addNewUser (Model model){
         return "addNewUser";
     }
+
 }
