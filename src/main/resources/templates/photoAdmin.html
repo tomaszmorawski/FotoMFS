@@ -55,10 +55,14 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">LOGIN: </h1>
+        <h1 class="my-4">Dodaj zdjęcia dla: </h1>
+
         <div class="list-group">
-          <a href="#" class="list-group-item">Counter</a>
-          <a href="#" class="list-group-item">Back to Admin Page</a>
+          <form>
+          <input type="file" class="form-control-file" multiple>
+          </form>
+          <a class="list-group-item">Counter</a>
+          <a th:href="@{/admin}" class="list-group-item">Back to Admin Page</a>
 
         </div>
 

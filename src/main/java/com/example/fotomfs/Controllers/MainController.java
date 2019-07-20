@@ -27,7 +27,7 @@ public class MainController {
 
     @GetMapping("/")
     private String showMainPage(Model model) {
-        return "photo";
+        return "photoAdmin";
     }
 
     @GetMapping("/loginHome")
