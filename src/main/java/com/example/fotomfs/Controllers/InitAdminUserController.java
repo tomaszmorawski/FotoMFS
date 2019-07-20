@@ -33,6 +33,7 @@ public class InitAdminUserController {
         roleService.addRole(roleAdmin);
         roleService.addRole(roleUser);
         user.addRole(roleService.getRoleByName("ROLE_ADMIN"));
+        user.addRole(roleService.getRoleByName("ROLE_USER"));
         userService.addUser(user);
 
         return "redirect:/";
