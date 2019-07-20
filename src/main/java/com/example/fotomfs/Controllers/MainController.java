@@ -1,6 +1,9 @@
 package com.example.fotomfs.Controllers;
 
 import com.example.fotomfs.Model.User;
+import com.example.fotomfs.Services.RoleService;
+import com.example.fotomfs.Services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,15 @@ import java.util.List;
 
 @Controller
 public class MainController {
+
+    private UserService userService;
+    private RoleService roleService;
+
+    public MainController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
+
 
     @GetMapping("/")
     private String showMainPage(Model model) {
@@ -36,8 +48,9 @@ public class MainController {
             model.addAttribute("newUser", newUser);
             return "addNewUser";
         }
-        List<User> userList = new ArrayList<>();
-        userList.add(newUser);
+        newUser.getRoles().add(roleService.getRoleByName("ROLE_USER"));
+        userService.addUser(newUser);
+        List<User> userList = userService.getAllUsers();
         model.addAttribute("users", userList);
         return "redirect:/admin";
     }

@@ -31,6 +31,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         HttpSession session = httpServletRequest.getSession();
         User user = repository.findByLogin(authentication.getName());
         session.setAttribute("user", user);
-        httpServletResponse.sendRedirect("/");
+        if (user.getLogin().equals("admin")){
+            httpServletResponse.sendRedirect("/admin");
+        }else {
+            httpServletResponse.sendRedirect("/");
+        }
     }
 }
