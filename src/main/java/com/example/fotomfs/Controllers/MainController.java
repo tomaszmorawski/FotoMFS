@@ -12,4 +12,14 @@ public class MainController {
         return "photo";
     }
 
+    @GetMapping("/loginHome")
+    private String showLoginPage(Model model){
+        return "loginHome";
+    }
+
+    @GetMapping("/addNewUser")
+    private String addNewUser (Model model){
+        return "addNewUser";
+    }
+
 }
