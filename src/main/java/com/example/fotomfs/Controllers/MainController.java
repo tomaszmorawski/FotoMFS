@@ -42,6 +42,10 @@ public class MainController {
         userList.add(newUser);
         model.addAttribute("users",userList);
         return "redirect:/admin";
+
+    @GetMapping("/admin")
+    private String adminPage (Model model){
+        return "admin";
     }
 
 }

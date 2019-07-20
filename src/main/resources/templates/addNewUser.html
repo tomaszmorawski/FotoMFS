@@ -43,13 +43,15 @@
             <form class="login100-form validate-form" th:object="${newUser}" th:action="@{/newuser}" th:method="post">
                 <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                     <span class="label-input100">Login</span>
-                    <input th:field="*{login}" class="input100" type="text"  placeholder="Enter username">
+                    <input th:field="*{login}" class="input100" type="text"  placeholder="Nadaj Login">
+
                     <span class="focus-input100"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                     <span class="label-input100">Hasło</span>
-                    <input th:field="*{password}" class="input100" type="text"  placeholder="Enter password">
+                    <input th:field="*{password}" class="input100" type="text"  placeholder="Nadaj Hasło">
+
                     <span class="focus-input100"></span>
                 </div>
 
