@@ -22,4 +22,9 @@ public class MainController {
         return "addNewUser";
     }
 
+    @GetMapping("/admin")
+    private String adminPage (Model model){
+        return "admin";
+    }
+
 }
