@@ -50,9 +50,8 @@
 
       <div class="row">
 
-        <div th:each="file : ${fileList}">
 
-          <div class="col-lg-4 col-md-6 mb-4">
+          <div class="col-lg-4 col-md-6 mb-4" th:each="file : ${fileList}">
             <div class="card h-100">
               <a href="#"><img class="card-img-top" th:src="@{'/image/'+${file}}" alt=""></a>
               <div class="card-body">
@@ -60,7 +59,6 @@
                   <a th:text="${file}" >Picture</a>
                 </h4>
           </div>
-        </div>
 
       </div>
       <!-- /.row -->

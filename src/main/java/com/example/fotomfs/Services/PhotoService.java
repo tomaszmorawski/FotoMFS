@@ -74,4 +74,12 @@ public class PhotoService {
         photo.setChosen(!photo.isChosen());
         photoRepository.save(photo);
     }
+
+    public void deletePhotoByUserId(Long userId) {
+        List<String> photoList = findAllUserPhotoByUserId(userId);
+        for (String photo: photoList) {
+            removeFileByFileName(photo);
+        }
+        photoRepository.deleteAllByUserId(userId);
+    }
 }

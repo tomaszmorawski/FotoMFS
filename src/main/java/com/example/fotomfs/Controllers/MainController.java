@@ -104,6 +104,7 @@ public class MainController {
 
     @GetMapping("/delete/{userId}")
     private String deleteUser(@PathVariable Long userId, Model model){
+        photoService.deletePhotoByUserId(userId);
         userService.deleteUserById(userId);
         return "redirect:/admin";
     }
