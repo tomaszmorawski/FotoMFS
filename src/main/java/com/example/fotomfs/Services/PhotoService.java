@@ -5,11 +5,16 @@ import com.example.fotomfs.Model.User;
 import com.example.fotomfs.Repository.PhotoRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PhotoService {
+    public static final String uploadingDir = System.getProperty("user.dir") + "/src/main/upload/";
 
     PhotoRepository photoRepository;
     UserService userService;
@@ -37,5 +42,16 @@ public class PhotoService {
             fileList.add(photo.getFileName());
         }
         return fileList;
+    }
+
+    public void removeFileByFileName(String fileName) {
+        Photo photo = photoRepository.findByFileName(fileName);
+        photoRepository.delete(photo);
+        Path fileToDeletePath = Paths.get(uploadingDir + fileName);
+        try {
+            Files.delete(fileToDeletePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
