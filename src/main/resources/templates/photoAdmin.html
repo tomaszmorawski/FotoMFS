@@ -3,98 +3,94 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>Miko Foto Studio</title>
+    <title>Miko Foto Studio</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="../css/shop-homepage.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="../css/shop-homepage.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 
-  </nav>
+</nav>
 
-  <!-- Page Content -->
-  <div class="container">
+<!-- Page Content -->
+<div class="container">
 
     <div class="row">
 
-      <div class="col-lg-3">
+        <div class="col-lg-3">
 
-        <h1 class="my-4">Dodaj zdjęcia dla: </h1>
+            <h1 class="my-4">Dodaj zdjęcia dla: </h1>
 
-        <div class="list-group">
-          <form enctype="multipart/form-data" th:action="@{'/photoAdmin/'+${userId}}" method="POST">
-          <input type="file" class="form-control-file" name="uploadingFiles" multiple>
-            <input type="submit" value="Upload files">
-          </form>
-          <a><br> </a>
-          <a class="list-group-item">Dodano zdjęć:<span th:text="${counter}"></span> </a>
-          <a th:href="@{/admin}" class="list-group-item">Save and back to Admin Page</a>
+            <div class="list-group">
+                <form enctype="multipart/form-data" th:action="@{'/photoAdmin/'+${userId}}" method="POST">
+                    <input type="file" class="form-control-file" name="uploadingFiles" multiple>
+                    <input type="submit" value="Upload files">
+                </form>
+                <a><br> </a>
+                <a class="list-group-item">Dodano zdjęć:<span th:text="${counter}"></span> </a>
+                <a th:href="@{/admin}" class="list-group-item">Save and back to Admin Page</a>
 
-        </div>
-
-      </div>
-      <!-- /.col-lg-3 -->
-
-      <div class="col-lg-9">
-
-
-
-        <div class="row" >
-          <div th:each="file : ${fileList}">
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" th:src="@{'/image/'+${file}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a th:text="${file}" >Picture</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-
-                <small class="text-muted"><a th:href="@{/delete/}+${userId}+'/'+${file}"> <img src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a></small>
-              </div>
             </div>
-          </div>
-          </div>
 
         </div>
-        <!-- /.row -->
+        <!-- /.col-lg-3 -->
 
-      </div>
-      <!-- /.col-lg-9 -->
+        <div class="col-lg-9">
+
+
+            <div class="row">
+
+                <div class="col-lg-4 col-md-6 mb-4" th:each="file : ${fileList}">
+                    <div class="card h-100">
+                        <a href="#"><img class="card-img-top" th:src="@{'/image/'+${file}}" alt=""></a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a th:text="${file}">Picture</a>
+                            </h4>
+
+                        </div>
+                        <div class="card-footer">
+
+                            <small class="text-muted"><a th:href="@{/delete/}+${userId}+'/'+${file}"> <img
+                                    src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.col-lg-9 -->
 
     </div>
     <!-- /.row -->
 
-  </div>
-  <!-- /.container -->
+</div>
+<!-- /.container -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+<!-- Footer -->
+<footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Andy & TheSpiochu</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Andy & TheSpiochu</p>
     </div>
     <!-- /.container -->
-  </footer>
+</footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
