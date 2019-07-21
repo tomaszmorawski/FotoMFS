@@ -1,6 +1,7 @@
 package com.example.fotomfs.Controllers;
 
 import com.example.fotomfs.Model.User;
+import com.example.fotomfs.Services.PhotoService;
 import com.example.fotomfs.Services.RoleService;
 import com.example.fotomfs.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +27,21 @@ public class MainController {
 
     private UserService userService;
     private RoleService roleService;
+    private PhotoService photoService;
 
-    public MainController(UserService userService, RoleService roleService) {
+    public MainController(UserService userService, RoleService roleService, PhotoService photoService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.photoService = photoService;
     }
 
 
-    @GetMapping("/photoAdmin")
-    private String showMainPage(Model model) {
-        return "photoAdmin";
-    }
 
-    @GetMapping("/photoUser")
-    private String showAddedPhotosToUser (Model model) {
+
+    @GetMapping("/photoUser/{id}")
+    private String showAddedPhotosToUser (@PathVariable Long id, Model model) {
+        List<String> fileList = photoService.findAllUserPhotoByUserId(id);
+        model.addAttribute("fileList", fileList);
         return "photoUser";
     }
 
@@ -87,16 +89,27 @@ public class MainController {
         return "redirect:/admin";
     }
 
-    @PostMapping("photoAdmin")
+
+    @GetMapping("/photoAdmin/{userId}")
+    private String showMainPage(@PathVariable Long userId,Model model) {
+        List<String> fileList = photoService.findAllUserPhotoByUserId(userId);
+        model.addAttribute("userId",userId);
+        model.addAttribute("fileList", fileList);
+        return "photoAdmin";
+    }
+
+    @PostMapping("photoAdmin/{id}")
     public String uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
                                 HttpServletRequest servletRequest,
-                                Model model) throws IOException {
+                                Model model,
+                                @PathVariable Long id) throws IOException {
         List<String> fileList = new ArrayList<>();
         for(MultipartFile uploadedFile : uploadingFiles) {
             File file = new File(uploadingDir + uploadedFile.getOriginalFilename());
             uploadedFile.transferTo(file);
             fileList.add(uploadedFile.getOriginalFilename());
         }
+        photoService.joinPhotoToUser(fileList,id);
         model.addAttribute("counter", uploadingFiles.length);
         model.addAttribute("fileList",fileList);
         return "photoAdmin";
