@@ -4,13 +4,11 @@ import com.example.fotomfs.Model.User;
 import com.example.fotomfs.Services.PhotoService;
 import com.example.fotomfs.Services.RoleService;
 import com.example.fotomfs.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,8 +45,10 @@ public class MainController {
 
     @GetMapping("/photoUserChoice/{id}")
     private String showAddedPhotosToAdmin (@PathVariable Long id, Model model) {
-
-
+        User user = userService.getUserById(id);
+        List<String> fileList = photoService.findAllUserPhotoByUserIdAndAreChoice(id);
+        model.addAttribute("userLogin", user.getLogin());
+        model.addAttribute("fileList",fileList);
         return "photoUserChoice";
     }
 

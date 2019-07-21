@@ -54,4 +54,15 @@ public class PhotoService {
             e.printStackTrace();
         }
     }
+
+    public List<String> findAllUserPhotoByUserIdAndAreChoice(Long id) {
+        List<String> fileList = new ArrayList<>();
+        List<Photo> allByUserId = photoRepository.findAllByUserId(id);
+        for (Photo photo : allByUserId) {
+            if (photo.isChosen()) {
+                fileList.add(photo.getFileName());
+            }
+        }
+        return fileList;
+    }
 }
