@@ -60,12 +60,13 @@
               <a href="#"><img class="card-img-top" th:src="@{'/image/'+${file}}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="#">Picture name</a>
+                  <a th:text="${file}" >Picture</a>
                 </h4>
 
               </div>
               <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+
+                <small class="text-muted"><a th:href="@{/delete/}+${file}"> <img src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a></small>
               </div>
             </div>
           </div>
