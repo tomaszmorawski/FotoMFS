@@ -79,4 +79,9 @@ public class MainController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/errorPage")
+    private String errorPage (Model model){
+        return "errorPage";
+    }
+
 }
