@@ -45,8 +45,10 @@ public class MainController {
         return "photoUser";
     }
 
-    @GetMapping("/photoUserChoice")
-    private String showAddedPhotosToAdmin (Model model) {
+    @GetMapping("/photoUserChoice/{id}")
+    private String showAddedPhotosToAdmin (@PathVariable Long id, Model model) {
+
+
         return "photoUserChoice";
     }
 
@@ -92,16 +94,14 @@ public class MainController {
     @GetMapping("/delete/{userId}/{fileName}")
     private String deleteUser(@PathVariable Long userId,@PathVariable String fileName, Model model){
         photoService.removeFileByFileName(fileName);
-        List<String> fileList = photoService.findAllUserPhotoByUserId(userId);
-        model.addAttribute("userId",userId);
-        model.addAttribute("fileList", fileList);
-        return "photoAdmin";
+        return "redirect:/photoAdmin/"+userId;
         }
 
 
     @GetMapping("/photoAdmin/{userId}")
     private String showMainPage(@PathVariable Long userId,Model model) {
         List<String> fileList = photoService.findAllUserPhotoByUserId(userId);
+        model.addAttribute("count", fileList.size());
         model.addAttribute("userId",userId);
         model.addAttribute("fileList", fileList);
         return "photoAdmin";
@@ -109,8 +109,6 @@ public class MainController {
 
     @PostMapping("photoAdmin/{id}")
     public String uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
-                                HttpServletRequest servletRequest,
-                                Model model,
                                 @PathVariable Long id) throws IOException {
         List<String> fileList = new ArrayList<>();
         for(MultipartFile uploadedFile : uploadingFiles) {
@@ -119,9 +117,7 @@ public class MainController {
             fileList.add(uploadedFile.getOriginalFilename());
         }
         photoService.joinPhotoToUser(fileList,id);
-        model.addAttribute("counter", uploadingFiles.length);
-        model.addAttribute("fileList",fileList);
-        return "photoAdmin";
+        return "redirect:/photoAdmin/"+id;
     }
 
     @RequestMapping(value = "image/{imageName}")
