@@ -35,11 +35,12 @@
         <h1 class="my-4">Dodaj zdjęcia dla: </h1>
 
         <div class="list-group">
-          <form>
-          <input type="file" class="form-control-file" multiple>
+          <form enctype="multipart/form-data" action="/photoAdmin" method="POST">
+          <input type="file" class="form-control-file" name="uploadingFiles" multiple>
+            <input type="submit" value="Upload files">
           </form>
           <a><br> </a>
-          <a class="list-group-item">Dodano zdjęć: </a>
+          <a class="list-group-item">Dodano zdjęć:<span th:text="${counter}"></span> </a>
           <a th:href="@{/admin}" class="list-group-item">Save and back to Admin Page</a>
 
         </div>
@@ -51,11 +52,12 @@
 
 
 
-        <div class="row">
+        <div class="row" >
+          <div th:each="file : ${fileList}">
 
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+              <a href="#"><img class="card-img-top" th:src="@{'/image/'+${file}}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="#">Picture name</a>
@@ -67,80 +69,6 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Picture name</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Picture name</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Picture name</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Picture name</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Picture name</a>
-                </h4>
-
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
           </div>
 
         </div>
