@@ -89,6 +89,15 @@ public class MainController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/delete/{userId}/{fileName}")
+    private String deleteUser(@PathVariable Long userId,@PathVariable String fileName, Model model){
+        photoService.removeFileByFileName(fileName);
+        List<String> fileList = photoService.findAllUserPhotoByUserId(userId);
+        model.addAttribute("userId",userId);
+        model.addAttribute("fileList", fileList);
+        return "photoAdmin";
+        }
+
 
     @GetMapping("/photoAdmin/{userId}")
     private String showMainPage(@PathVariable Long userId,Model model) {
