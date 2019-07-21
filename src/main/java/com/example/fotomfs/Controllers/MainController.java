@@ -1,5 +1,6 @@
 package com.example.fotomfs.Controllers;
 
+import com.example.fotomfs.Model.Photo;
 import com.example.fotomfs.Model.User;
 import com.example.fotomfs.Services.PhotoService;
 import com.example.fotomfs.Services.RoleService;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -35,12 +37,27 @@ public class MainController {
 
 
 
+    @GetMapping("/")
+    private String showUser(HttpServletRequest servletRequest){
+        User user = (User) servletRequest.getSession().getAttribute("user");
+        if (user.getLogin().equals("admin")){
+            return "redirect:/admin";
+        }
+        return "redirect:/photoUser/"+user.getId();
+    }
 
     @GetMapping("/photoUser/{id}")
     private String showAddedPhotosToUser (@PathVariable Long id, Model model) {
-        List<String> fileList = photoService.findAllUserPhotoByUserId(id);
+        List<Photo> fileList = photoService.findAllUserPhoto(id);
+        model.addAttribute("userId",id);
         model.addAttribute("fileList", fileList);
         return "photoUser";
+    }
+
+    @GetMapping("/choice/{userId}/{filename}")
+    private String choiceFileByName(@PathVariable Long userId, @PathVariable String filename, Model model){
+        photoService.changeChoice(filename);
+        return "redirect:/photoUser/"+userId;
     }
 
     @GetMapping("/photoUserChoice/{id}")

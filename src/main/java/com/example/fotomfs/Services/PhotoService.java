@@ -43,6 +43,9 @@ public class PhotoService {
         }
         return fileList;
     }
+    public List<Photo> findAllUserPhoto(Long userId) {
+        return photoRepository.findAllByUserId(userId);
+    }
 
     public void removeFileByFileName(String fileName) {
         Photo photo = photoRepository.findByFileName(fileName);
@@ -64,5 +67,11 @@ public class PhotoService {
             }
         }
         return fileList;
+    }
+
+    public void changeChoice(String filename) {
+        Photo photo = photoRepository.findByFileName(filename);
+        photo.setChosen(!photo.isChosen());
+        photoRepository.save(photo);
     }
 }
