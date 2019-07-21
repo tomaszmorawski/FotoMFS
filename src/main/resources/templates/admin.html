@@ -65,7 +65,7 @@
                         <a th:href="@{'/photoUserChoice/' + ${user.id}}" th:text="${user.login}"> </a>
                         </td>
                         <td th:text="${user.password}">Hasło</td>
-                        <td align="center"><a th:href="@{/photoAdmin}"> <img src="\images\icons\change.png" style="width: 17px; height: 17px;"></a></td>
+                        <td align="center"><a th:href="@{/photoAdmin/}+${user.id}"> <img src="\images\icons\change.png" style="width: 17px; height: 17px;"></a></td>
                         <td align="center"><a th:href="@{/delete/}+${user.id}"> <img src="\images\icons\trash.png" style="width: 17px; height: 17px;"></a></td>
                     </tr>
 
