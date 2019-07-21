@@ -10,4 +10,5 @@ import java.util.List;
 public interface PhotoRepository extends JpaRepository<Photo,Long> {
     List<Photo> findAllByUserId(Long id);
     Photo findByFileName(String fileName);
+    void deleteAllByUserId(Long id);
 }
