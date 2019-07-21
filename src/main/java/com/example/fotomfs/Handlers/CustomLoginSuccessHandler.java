@@ -34,7 +34,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
         if (user.getLogin().equals("admin")){
             httpServletResponse.sendRedirect("/admin");
         }else {
-            httpServletResponse.sendRedirect("/");
+            httpServletResponse.sendRedirect("/loginHome");
         }
     }
 }

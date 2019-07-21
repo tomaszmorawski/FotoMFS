@@ -25,9 +25,19 @@ public class MainController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/photoAdmin")
     private String showMainPage(Model model) {
         return "photoAdmin";
+    }
+
+    @GetMapping("/photoUser")
+    private String showAddedPhotosToUser (Model model) {
+        return "photoUser";
+    }
+
+    @GetMapping("/photoUserChoice")
+    private String showAddedPhotosToAdmin (Model model) {
+        return "photoUserChoice";
     }
 
     @GetMapping("/loginHome")
