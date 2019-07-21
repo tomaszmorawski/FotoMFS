@@ -110,5 +110,10 @@ public class MainController {
 
         return Files.readAllBytes(serverFile.toPath());
     }
+  
+    @GetMapping("/errorPage")
+    private String errorPage (Model model){
+        return "errorPage";
+    }
 
 }
