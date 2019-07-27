@@ -3,34 +3,39 @@ package com.example.fotomfs.Controllers;
 import com.example.fotomfs.Model.Mail;
 import com.example.fotomfs.Services.AutoMailingService;
 import com.example.fotomfs.Services.MailingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.fotomfs.Services.PhotoService;
+import com.example.fotomfs.Services.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 @Controller
 public class MailController {
 
     MailingService mailingService;
     AutoMailingService autoMailingService;
+    UserService userService;
+    PhotoService photoService;
 
-
-    @Autowired
-    public MailController(MailingService mailingService) {
+    public MailController(MailingService mailingService, AutoMailingService autoMailingService, UserService userService, PhotoService photoService) {
         this.mailingService = mailingService;
+        this.autoMailingService = autoMailingService;
+        this.userService = userService;
+        this.photoService = photoService;
     }
 
-    @PostMapping("/send/{userId}/{fileName}")
-    public String sendMessageToAdmin (@PathVariable Long userId, @PathVariable String fileName, Mail mail){
+    @GetMapping("/send/{userId}")
+    public String sendMessageToAdmin(@PathVariable Long userId, Model model) {
+        Mail mail = new Mail();
+        String body = "Uzytkownik: "+userService.getUserById(userId).getLogin()+" wybrał następujące zdjęcia: ";
+        String fileList = photoService.findAllUserPhotoByUserIdAndAreChoice(userId).stream().collect(Collectors.joining());
+        autoMailingService.sendMessage(mail.getEmail(), "wybrano zdjęcia", body+fileList);
 
-        mailingService.addMail(mail);
-      autoMailingService.sendMessage(mail.getEmail(), "wybrano zdjęcia", "Dzieki");
-
-        return "redirect:/";
+        return "redirect:/logout";
 
     }
 

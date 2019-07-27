@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
         @Autowired
         JavaMailSender javaMailSender;
 
-        public void sendMessage (String to, String subject, String photoName){
+        public void sendMessage (String to, String subject, String mailBody){
 
 
 
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setTo(to);
             simpleMailMessage.setSubject(subject);
-            simpleMailMessage.setText(photoName);
+            simpleMailMessage.setText(mailBody);
             javaMailSender.send(simpleMailMessage);
         }
 }
