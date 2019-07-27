@@ -60,8 +60,8 @@
                 <div class="card-footer">
 
                   <small class="text-muted"><a th:href="@{/choice/}+${userId}+'/'+${file.fileName}">
-                    <img  th:if="${file.chosen == true}" src="\images\icons\change.png" style="width: 17px; height: 17px;">
-                    <img  th:unless="${file.chosen == true}" src="\images\icons\trash.png" style="width: 17px; height: 17px;">
+                    <img  th:if="${file.chosen == true}" src="\images\icons\approved.png" style="width: 17px; height: 17px;">
+                    <img  th:unless="${file.chosen == true}" src="\images\icons\choice.png" style="width: 17px; height: 17px;">
                   </a></small>
                 </div>
 

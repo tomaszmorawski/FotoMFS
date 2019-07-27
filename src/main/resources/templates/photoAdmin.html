@@ -32,7 +32,7 @@
 
         <div class="col-lg-3">
 
-            <h1 class="my-4">Dodaj zdjęcia dla: </h1>
+            <h1 class="my-4">Dodaj zdjęcia dla: <span th:text="${userLogin}"></span></h1>
 
             <div class="list-group">
                 <form enctype="multipart/form-data" th:action="@{'/photoAdmin/'+${userId}}" method="POST">
@@ -40,9 +40,10 @@
                     <input type="submit" value="Upload files">
                 </form>
                 <a><br> </a>
-                <a class="list-group-item">Dodano zdjęć:<span th:text="${counter}"></span> </a>
+                <a class="list-group-item">Dodano zdjęć:<span th:text="${count}"></span> </a>
                 <a th:href="@{/admin}" class="list-group-item">Save and back to Admin Page</a>
-
+                <a class="list-group-item">Login: <span th:text="${userLogin}"></span></a>
+                <a class="list-group-item">Password: <span th:text="${userPassword}"></span></a>
             </div>
 
         </div>

@@ -119,8 +119,11 @@ public class MainController {
     @GetMapping("/photoAdmin/{userId}")
     private String showMainPage(@PathVariable Long userId,Model model) {
         List<String> fileList = photoService.findAllUserPhotoByUserId(userId);
+        User user = userService.getUserById(userId);
         model.addAttribute("count", fileList.size());
         model.addAttribute("userId",userId);
+        model.addAttribute("userLogin", user.getLogin());
+        model.addAttribute("userPassword", user.getPassword() );
         model.addAttribute("fileList", fileList);
         return "photoAdmin";
     }
@@ -147,7 +150,7 @@ public class MainController {
         return Files.readAllBytes(serverFile.toPath());
     }
   
-    @GetMapping("/errorPage")
+    @GetMapping("/error")
     private String errorPage (Model model){
         return "errorPage";
     }
