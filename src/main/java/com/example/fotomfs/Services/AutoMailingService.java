@@ -14,8 +14,7 @@ import org.springframework.stereotype.Component;
         JavaMailSender javaMailSender;
 
         public void sendMessage (String to, String subject, String mailBody){
-
-
+            
 
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setTo(to);

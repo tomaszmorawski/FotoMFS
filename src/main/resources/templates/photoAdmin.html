@@ -37,7 +37,9 @@
             <div class="list-group">
                 <form enctype="multipart/form-data" th:action="@{'/photoAdmin/'+${userId}}" method="POST">
                     <input type="file" class="form-control-file" name="uploadingFiles" multiple>
-                    <input type="submit" value="Upload files">
+                    <input type="submit" value="Upload files" onclick="ResizeImage()">
+                    <script src="js/watermark.js"></script>
+
                 </form>
                 <a><br> </a>
                 <a class="list-group-item">Dodano zdjęć:<span th:text="${count}"></span> </a>
