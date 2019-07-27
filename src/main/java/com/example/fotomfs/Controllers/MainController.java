@@ -110,7 +110,7 @@ public class MainController {
     }
 
     @GetMapping("/delete/{userId}/{fileName}")
-    private String deleteUser(@PathVariable Long userId,@PathVariable String fileName, Model model){
+    private String deleteUserPhoto (@PathVariable Long userId,@PathVariable String fileName, Model model){
         photoService.removeFileByFileName(fileName);
         return "redirect:/photoAdmin/"+userId;
         }
