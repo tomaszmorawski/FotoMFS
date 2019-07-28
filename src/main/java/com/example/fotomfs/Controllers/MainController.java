@@ -129,14 +129,15 @@ public class MainController {
     }
 
     @PostMapping("photoAdmin/{id}")
-    public String uploadingPost(@RequestParam("uploadingFiles") MultipartFile[] uploadingFiles,
+    public String uploadingPost(@RequestParam("file") MultipartFile uploadedFile,
+                                @RequestParam("filename") String filename,
                                 @PathVariable Long id) throws IOException {
         List<String> fileList = new ArrayList<>();
-        for(MultipartFile uploadedFile : uploadingFiles) {
-            File file = new File(uploadingDir + uploadedFile.getOriginalFilename());
+        //for(MultipartFile uploadedFile : uploadingFiles) {
+            File file = new File(uploadingDir + filename);
             uploadedFile.transferTo(file);
             fileList.add(uploadedFile.getOriginalFilename());
-        }
+        //}
         photoService.joinPhotoToUser(fileList,id);
         return "redirect:/photoAdmin/"+id;
     }
